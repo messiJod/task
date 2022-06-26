@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\company;
-use App\user;
+use App\Models\User;
 
 class CompanyController extends Controller
 {
@@ -21,7 +21,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $allCompanies = companies::orderBy('created_at', 'desc')->paginate(10);
+        $allCompanies = Company::orderBy('created_at', 'desc')->paginate(10);
         return view('company.index')->with('companies', $allCompanies);
     }
 

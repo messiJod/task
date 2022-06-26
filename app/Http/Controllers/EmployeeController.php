@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\user;
-use App\company;
+use App\Models\User;
+use App\Models\Company;
 use Gate;
 use App\Notifications\RegisterEmployee;
 use Notification;
@@ -13,7 +13,7 @@ class EmployeeController extends Controller
 {
     public function __construct()
     {
-        // you must know that the next statement in the comment mean that this middleware will be applied on nothing because you say only nothing 
+        // you must know that the next statement in the comment mean that this middleware will be applied on nothing because you say only nothing
         // so you must remove the seconde argument
         // and by the way i you say except nothing it will not ignore any action because
         // you didn't mention anyone and in this case the middleware will be applied on the all action in this controller
@@ -103,7 +103,7 @@ class EmployeeController extends Controller
         // the difference between both of two next lines that the first one will proceed into if clause
         // but the seconde one will will throw exception
 
-        // if (! $this->authorize('show-employee', user::findOrFail($id))) 
+        // if (! $this->authorize('show-employee', user::findOrFail($id)))
         if (Gate::denies('show-employee', user::findOrFail($id)) && Gate::denies('adminRole'))
             return redirect('/employee')->with('error', 'you unauthorized to show this profile');
 
